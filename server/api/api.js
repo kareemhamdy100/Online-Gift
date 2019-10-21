@@ -7,11 +7,13 @@ const defualtOrErrorRequest =  (req, res) => {
     res.json(
         {
             msg: "this URL not found you can use",
-            avaliapleUrls: [
+            availableUrls: [
                 "auth/login           POST",
                 "auth/signup          POST",
-                "api/gifts           GET {POST DELETE, auth: true, admin: true}",
-                "api/gifts/:id       GET {PUT DELETE,  auth: true, admin: true }",
+                "api/gifts            GET {POST DELETE, auth: true, admin: true}",
+                "api/gifts/:id        GET {PUT DELETE,  auth: true, admin: true }",
+                "api/gifts/:id/upload {POST,  auth: true, admin: true }  ",
+                "api/gifts/:id/image    GET",
                 "api/orders          POST {GET DELETE, auth: true, same_user: true }",
                 "api/orders/:id      {GET PUT DELETE,  auth: true, same_user: true }",
                 "api/drivers         {GET POST DELETE, auth: true, admin: true}",   
