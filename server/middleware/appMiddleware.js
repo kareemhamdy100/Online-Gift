@@ -16,5 +16,7 @@ exports.globalMiddleware = (app)=> {
 
 // eslint-disable-next-line no-unused-vars
 exports.errMiddleware = (err,req , res , next)=>{
-      res.json({errMSG: err.message});
+      console.log(err.status)
+      const status = err.status || 400
+      res.status(status).json({errMSG: err.message});
 }
