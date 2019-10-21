@@ -16,10 +16,14 @@ router.route('/:id')
    .delete(auth.verifyUser, auth.verifyAdmin, controller.deleteOne);
 
 //upload Images
-router.route('/upload')
+router.route('/:id/upload')
    .post(auth.verifyUser,
       auth.verifyAdmin,
       upload.single("image"),
       controller.uploadImage);
+
+
+router.route('/:id/image')
+   .get(controller.getImage);
 
 module.exports = router;

@@ -1,5 +1,5 @@
 const Gift = require('./giftModel');
-
+const sharp = require('sharp');
 
 exports.params = async (req, res, next, id) => {
   try {
@@ -50,6 +50,9 @@ exports.getOne = (req, res) => {
 };
 
 exports.updateOne = async (req, res, next) => {
+  //can't update image from here use imageUpload
+  delete req.body.image;
+  delete req.body.image_url;
   req.gift.set(req.body);
   try {
     const updatedGift = await req.gift.save();
@@ -58,6 +61,7 @@ exports.updateOne = async (req, res, next) => {
     next(err);
   }
 };
+
 
 exports.deleteOne = async (req, res, next) => {
   try {
@@ -69,9 +73,32 @@ exports.deleteOne = async (req, res, next) => {
 };
 
 
-exports.uploadImage = async (req, res) => {
-  res.json({
-    status: "upload successful",
-    path: req.file.path,
-  });
+exports.uploadImage = async (req, res, next) => {
+  try {
+    const buffer = await sharp(req.file.buffer).png().toBuffer();
+    const imageUrl = `api/gifts/${req.gift._id}/image`;
+
+    const currGift = req.gift;
+    currGift.image = buffer;
+    currGift.image_url = imageUrl;
+
+    await currGift.save();
+    res.json({
+      status: "upload successful",
+      path: imageUrl,
+    });
+  } catch (err) {
+    next(err);
+  }
+}
+
+
+exports.getImage = (req, res) => {
+  const image = req.gift.image;
+  if (!image) {
+    res.status(404).send();
+  } else {
+    res.set('Content-Type', 'image/png')
+    res.send(image);
+  }
 }
