@@ -3,12 +3,12 @@
 ## description  
  this is a **back-end** that help you send a gift to some one far away you, 
  as the website have some gifts and you as user could create order.
- your oder should contan the following: 
- **gift/s you chosed, some information about who will reacive the order, location, and Date** 
+ your oder should contan the following:     
+ **gift/s you chosed, some information about who will reacive the order, location, and Date**     
  after that our job to deliver the gift 
  
  ## How to use 
- please open  https://online-gift-task.herokuapp.com/api
+ please open  https://online-gift-task.herokuapp.com/api   
  you will get all avalible links to end points and how to use it.   
  you should see some thing like this 
  
@@ -30,9 +30,9 @@
         }
         
         
-Every end-point have the http method you could use it 
-and if auth is true you should send token header
-if admin is true you should use admin account 
+Every end-point have the http method you could use it    
+and if **auth is true** you should send **JSON WEB TOKEN** in headers   
+if **admin is true** you should use admin account    
 
 this is admin account : 
         
@@ -43,7 +43,7 @@ this is admin account :
         passowrd:123456
 
 ### note   
-      you can't create admin account throw api you should access to the database
+      you can't create admin account through api you should access to the database
       
 ## what system can do and can't
 **as normal user**   
@@ -76,10 +76,4 @@ this is admin account :
       mark order as complete and update drivers with that  not implemented
       error handlers
       
-      
- 
- 
- 
-  
-   
-   
+     
