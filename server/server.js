@@ -8,7 +8,6 @@ const authRouter = require('./passportAuthentication/authRouters');
 const apiRouter = require('./api/api');
 
 
-//to remove warrning massages
 mongoose.connect(config.dbURL,
     {
         useNewUrlParser: true,
@@ -18,7 +17,7 @@ mongoose.connect(config.dbURL,
     }));
 
 
-    middleware.globalMiddleware(app);
+middleware.globalMiddleware(app);
 
 app.use('/auth', authRouter);
 app.use('/api', apiRouter);
