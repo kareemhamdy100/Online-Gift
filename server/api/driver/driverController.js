@@ -47,22 +47,22 @@ exports.getOne = (req, res) => {
     res.json(req.driver);
 };
 
-exports.updateOne = async (req, res, next) => {
-    const body = req.body;
-    // unavailable to update these fields 
-    delete body.future_orders;
-    delete body.completed_orders;
+// exports.updateOne = async (req, res, next) => {
+//     const body = req.body;
+//     // unavailable to update these fields 
+//     delete body.future_orders;
+//     delete body.completed_orders;
 
-    req.driver.set(body);
-    req.driver.user.set(body.user);
-    try {
-        const updatedDriver = await req.driver.save();
-        await req.driver.user.save();
-        res.json(updatedDriver);
-    } catch (err) {
-        next(err);
-    }
-};
+//     req.driver.set(body);
+//     req.driver.user.set(body.user);
+//     try {
+//         const updatedDriver = await req.driver.save();
+//         await req.driver.user.save();
+//         res.json(updatedDriver);
+//     } catch (err) {
+//         next(err);
+//     }
+// };
 
 exports.deleteOne = async (req, res, next) => {
     try {

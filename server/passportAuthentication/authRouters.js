@@ -19,14 +19,15 @@ const singUp = (req, res, next) => {
         driver: req.body.driver
     }),
         req.body.password,
-        (err) => {
+        (err, user) => {
             if (err) {
                 err.status = 500;
                 next(err);
             } else {
                 passport.authenticate('local')(req, res, () => {
+                    const token = JWT_Auth.getToken({ _id: user._id });
                     res.statusCode = 201;
-                    res.json({ sucess: true, status: 'Registration Successful!' });
+                    res.json({ sucess: true, status: 'Registration Successful!', token });
                 });
             }
         });

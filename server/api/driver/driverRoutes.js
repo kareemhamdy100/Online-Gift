@@ -18,7 +18,6 @@ router.route('/me')
 router.route('/:id')
     .all(auth.verifyUser, auth.verifyAdmin)
     .get(controller.getOne)
-    .put(controller.updateOne)
     .delete(controller.deleteOne);
 
 
