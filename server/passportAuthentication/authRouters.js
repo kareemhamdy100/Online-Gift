@@ -4,10 +4,48 @@ const local = require('./passportLocal');
 
 const router = require('express').Router();
 const passport = require('passport');
-const middleware = require('./JWT_middleware');
 
 
-router.post('/signup', middleware.addNewUserMiddleWare);
-router.post('/login', passport.authenticate('local'), middleware.signInMiddleWare);
+
+const User = require('./UserModel');
+const JWT_Auth = require('./JWT_authentication');
+
+const singUp = (req, res, next) => {
+    User.register(new User({
+        username: req.body.username,
+        firstname: req.body.firstname,
+        lastname: req.body.lastname,
+        phone: req.body.phone,
+        driver: req.body.driver
+    }),
+        req.body.password,
+        (err) => {
+            if (err) {
+                err.status = 500;
+                next(err);
+            } else {
+                passport.authenticate('local')(req, res, () => {
+                    res.statusCode = 201;
+                    res.json({ sucess: true, status: 'Registration Successful!' });
+                });
+            }
+        });
+}
+
+const login = (req, res) => {
+    const token = JWT_Auth.getToken({ _id: req.user._id });
+    res.json({
+        sucess: true,
+        token: token,
+        status: 'You are successfully loggin'
+    });
+}
+
+
+
+
+router.post('/signup', singUp);
+router.post('/login', passport.authenticate('local'), login);
+
 
 module.exports = router;

@@ -44,3 +44,13 @@ exports.verifyAdmin = (req, res, next)=>{
         return(next(err));
     }
 }
+
+exports.verifyDriver= (req, res, next)=>{
+    if(req.user.driver){
+        next();
+    }else{
+        var err = new Error('You are not authorized to perform this operation!');
+        err.status = 403;
+        return(next(err));
+    }
+}

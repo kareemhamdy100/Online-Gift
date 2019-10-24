@@ -1,5 +1,5 @@
 const router = require('express').Router();
-const controller = require('./driverController');
+const controller = require('./userController');
 const auth = require('../../passportAuthentication/JWT_authentication');
 
 router.param('id', controller.params);
@@ -11,8 +11,9 @@ router.route('/')
     .delete(controller.delete);
 
 router.route('/me')
-    .all(auth.verifyUser, auth.verifyDriver, controller.oneMe)
+    .all(auth.verifyUser)
     .get(controller.getMe)
+    .put(controller.updateMe)
     .delete(controller.deleteMe);
 
 router.route('/:id')
@@ -20,7 +21,5 @@ router.route('/:id')
     .get(controller.getOne)
     .put(controller.updateOne)
     .delete(controller.deleteOne);
-
-
 
 module.exports = router;
