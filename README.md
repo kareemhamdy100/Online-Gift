@@ -48,20 +48,20 @@ this is admin account :
 ## what system can do and can't
 **as normal user**   
    1. you could create new user and login
-   2.add delete update an order   (**your own orders only**)    
+   2. add delete update an order   (**your own orders only**)   
+   3. create new user as a Driver 
    
    
 **as Admin**
   1. add delete update  driver to the system
   2. add delete update upload  gifts and photos 
+  3. add delete update  users to the system
   
+## some hypothesis and edge cases
   
-  ## some hypothesis and edge cases
-  
- 1.our drivers connect physically with the orgnisation    
- 2.a driver could take one order per day only     
- 3.there is no check if the two order are near or on the same place and date 
- 4.there is no user as driver 
+ 1.a driver could take one order per day only     
+ 2.there is no check if the two orders are near or on the same place and date 
+
  
  
  ## what I'm using 
